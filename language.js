@@ -202,10 +202,8 @@
         if (node.nodeType !== 3 || !node.nodeValue.trim()) continue;
         if (!textOriginals.has(node)) textOriginals.set(node, node.nodeValue);
         const original = textOriginals.get(node);
-        const leading = original.match(/^\s*/)?.[0] || "";
-        const trailing = original.match(/\s*$/)?.[0] || "";
         const phrase = original.trim().replace(/\s+/g, " ");
-        node.nodeValue = `${leading}${translateValue(phrase)}${trailing}`;
+        node.nodeValue = language === "zh" ? translateValue(phrase) : original;
       }
 
       for (const name of ["alt", "aria-label", "placeholder", "title"]) {
